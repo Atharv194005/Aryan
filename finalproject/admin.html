@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Course Management</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.amber-orange.min.css">
+    <link rel="stylesheet" href="admin-styles.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+        <!-- Login Screen -->
+        <div id="login-screen" class="login-container">
+            <div class="login-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Admin Login</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <form id="login-form">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="email" id="admin-email" required>
+                            <label class="mdl-textfield__label" for="admin-email">Email</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="password" id="admin-password" required>
+                            <label class="mdl-textfield__label" for="admin-password">Password</label>
+                        </div>
+                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="admin-dashboard" style="display: none;">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">Admin Dashboard</span>
+                    <div class="mdl-layout-spacer"></div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                        <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+                            <i class="material-icons">search</i>
+                        </label>
+                        <div class="mdl-textfield__expandable-holder">
+                            <input class="mdl-textfield__input" type="text" id="search">
+                            <label class="mdl-textfield__label" for="search">Search...</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                    <a href="#users" class="mdl-layout__tab is-active">Users</a>
+                    <a href="#enrollments" class="mdl-layout__tab">Enrollments</a>
+                    <a href="#courses" class="mdl-layout__tab">Courses</a>
+                    <a href="#analytics" class="mdl-layout__tab">Analytics</a>
+                </div>
+            </header>
+
+            <main class="mdl-layout__content">
+                <!-- Users Tab -->
+                <section class="mdl-layout__tab-panel is-active" id="users">
+                    <div class="page-content">
+                        <div class="dashboard-header">
+                            <h2>User Management</h2>
+                            <div class="dashboard-actions">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                    <i class="material-icons">file_download</i> Export Users
+                                </button>
+                            </div>
+                        </div>
+                        <div class="users-container" id="users-container"></div>
+                    </div>
+                </section>
+
+                <!-- Enrollments Tab -->
+                <section class="mdl-layout__tab-panel" id="enrollments">
+                    <div class="page-content">
+                        <div class="dashboard-header">
+                            <h2>Enrollment Management</h2>
+                            <div class="dashboard-actions">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                    <i class="material-icons">file_download</i> Export Enrollments
+                                </button>
+                            </div>
+                        </div>
+                        <div class="enrollments-container" id="enrollments-container"></div>
+                    </div>
+                </section>
+
+                <!-- Courses Tab -->
+                <section class="mdl-layout__tab-panel" id="courses">
+                    <div class="page-content">
+                        <div class="dashboard-header">
+                            <h2>Course Management</h2>
+                            <div class="dashboard-actions">
+                                <button id="show-add-course" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                    <i class="material-icons">add</i> Add New Course
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Add Course Form -->
+                        <div class="add-course-container mdl-card mdl-shadow--2dp">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">Add New Course</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <form id="add-course-form" class="add-course-form">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="text" id="course-name" required>
+                                        <label class="mdl-textfield__label" for="course-name">Course Name</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="number" id="course-price" required>
+                                        <label class="mdl-textfield__label" for="course-price">Price (₹)</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="url" id="course-image" required>
+                                        <label class="mdl-textfield__label" for="course-image">Image URL</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <textarea class="mdl-textfield__input" rows="3" id="course-description" required></textarea>
+                                        <label class="mdl-textfield__label" for="course-description">Course Description</label>
+                                    </div>
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                        Add Course
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="courses-container" id="courses-container"></div>
+                    </div>
+                </section>
+
+                <!-- Analytics Tab -->
+                <section class="mdl-layout__tab-panel" id="analytics">
+                    <div class="page-content">
+                        <div class="dashboard-header">
+                            <h2>Analytics Dashboard</h2>
+                        </div>
+                        <div class="analytics-grid">
+                            <div class="analytics-card mdl-card mdl-shadow--2dp">
+                                <div class="mdl-card__title">
+                                    <h2 class="mdl-card__title-text">Total Users</h2>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    <span class="analytics-number">1,234</span>
+                                    <span class="analytics-trend positive">
+                                        <i class="material-icons">trending_up</i> +15%
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="analytics-card mdl-card mdl-shadow--2dp">
+                                <div class="mdl-card__title">
+                                    <h2 class="mdl-card__title-text">Active Enrollments</h2>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    <span class="analytics-number">856</span>
+                                    <span class="analytics-trend positive">
+                                        <i class="material-icons">trending_up</i> +23%
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="analytics-card mdl-card mdl-shadow--2dp">
+                                <div class="mdl-card__title">
+                                    <h2 class="mdl-card__title-text">Revenue</h2>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    <span class="analytics-number">₹8.5L</span>
+                                    <span class="analytics-trend positive">
+                                        <i class="material-icons">trending_up</i> +18%
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Snackbar -->
+        <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+            <div class="mdl-snackbar__text"></div>
+            <button class="mdl-snackbar__action" type="button"></button>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>

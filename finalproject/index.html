@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management System</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.amber-orange.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title">Course Management</span>
+                <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+                    <a class="mdl-navigation__link" href="index.html">Home</a>
+                    <a class="mdl-navigation__link" href="about.html">About Us</a>
+                    <a class="mdl-navigation__link" href="contact.html">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Navigation</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="index.html">Home</a>
+                <a class="mdl-navigation__link" href="about.html">About Us</a>
+                <a class="mdl-navigation__link" href="contact.html">Contact</a>
+            </nav>
+        </div>
+
+        <main class="mdl-layout__content">
+            <!-- Auth Screen -->
+            <div id="auth-screen" class="auth-container">
+                <div class="auth-card mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Welcome Back</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <form id="auth-form">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="name" required>
+                                <label class="mdl-textfield__label" for="name">Full Name</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="email" id="email" required>
+                                <label class="mdl-textfield__label" for="email">Email Address</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="tel" id="phone" required>
+                                <label class="mdl-textfield__label" for="phone">Phone Number</label>
+                            </div>
+                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                                Get Started
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main App -->
+            <div id="main-app" style="display: none;">
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <h1>Welcome to Your Learning Journey</h1>
+                    <p>Explore our courses and start learning today</p>
+                </div>
+
+                <!-- Search Section -->
+                <div class="search-container">
+                    <div class="search-box mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="search">
+                        <label class="mdl-textfield__label" for="search">Search Courses...</label>
+                    </div>
+                </div>
+
+                <!-- Course Categories -->
+                <div class="categories-section">
+                    <h2>Course Categories</h2>
+                    <div class="category-chips">
+                        <span class="mdl-chip">
+                            <span class="mdl-chip__text">Web Development</span>
+                        </span>
+                        <span class="mdl-chip">
+                            <span class="mdl-chip__text">Data Science</span>
+                        </span>
+                        <span class="mdl-chip">
+                            <span class="mdl-chip__text">Algorithms</span>
+                        </span>
+                        <span class="mdl-chip">
+                            <span class="mdl-chip__text">Cybersecurity</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Courses Grid -->
+                <div class="courses-container" id="courses-container"></div>
+
+                <!-- Profile Section -->
+                <div class="profile-section">
+                    <h2>Your Profile</h2>
+                    <div class="profile-details" id="profile-details"></div>
+                </div>
+
+                <!-- Enrollments Section -->
+                <div class="enrollments-section">
+                    <h2>Your Enrollments</h2>
+                    <div class="enrollments-container" id="enrollments-container"></div>
+                </div>
+            </div>
+
+            <!-- Enrollment Dialog -->
+            <dialog id="enrollment-dialog" class="mdl-dialog">
+                <h4 class="dialog-title">Course Enrollment</h4>
+                <div class="dialog-content">
+                    <form id="enrollment-form">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" id="enrollment-name" required>
+                            <label class="mdl-textfield__label" for="enrollment-name">Full Name</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="tel" id="enrollment-mobile" required>
+                            <label class="mdl-textfield__label" for="enrollment-mobile">Mobile Number</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <textarea class="mdl-textfield__input" type="text" rows="3" id="enrollment-address" required></textarea>
+                            <label class="mdl-textfield__label" for="enrollment-address">Address</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="dialog-actions">
+                    <button type="button" class="mdl-button dialog-close">Cancel</button>
+                    <button type="button" class="mdl-button mdl-button--colored enroll">Enroll Now</button>
+                </div>
+            </dialog>
+
+            <!-- Snackbar -->
+            <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+                <div class="mdl-snackbar__text"></div>
+                <button class="mdl-snackbar__action" type="button"></button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="mdl-mini-footer">
+            <div class="mdl-mini-footer__left-section">
+                <div class="mdl-logo">Course Management</div>
+                <ul class="mdl-mini-footer__link-list">
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Privacy & Terms</a></li>
+                </ul>
+            </div>
+            <div class="mdl-mini-footer__right-section">
+                <button class="mdl-mini-footer__social-btn">
+                    <i class="material-icons">facebook</i>
+                </button>
+                <button class="mdl-mini-footer__social-btn">
+                    <i class="material-icons">twitter</i>
+                </button>
+                <button class="mdl-mini-footer__social-btn">
+                    <i class="material-icons">linkedin</i>
+                </button>
+            </div>
+        </footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
